@@ -7,4 +7,8 @@ services:
       target: dev
     container_name: php
     volumes:
+      - monitor_home:/home/zalex
       - "..:/usr/src/app"
+      - ~/.composer:/home/zalex/.composer
+volumes:
+  monitor_home:
