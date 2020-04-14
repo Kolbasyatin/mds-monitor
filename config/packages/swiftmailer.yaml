@@ -1,0 +1,6 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'file' }
+    encryption: ssl
+    sender_address: noreply@zalex.com.ua
+

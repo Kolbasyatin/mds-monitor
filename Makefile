@@ -4,7 +4,7 @@
 dockerfolder := .docker
 dockerc := docker-compose -f $(dockerfolder)/docker-compose.yml
 
-all: docker_build vendors_install server_start
+all: docker_build vendors_install
 
 docker_build:
 	@$(dockerc) build
@@ -17,3 +17,6 @@ server_start:
 
 cli:
 	@$(dockerc) run --rm php fish
+
+test:
+	@$(dockerc) run --rm php ./bin/phpunit
