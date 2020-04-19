@@ -10,5 +10,14 @@ services:
       - monitor_home:/home/zalex
       - "..:/usr/src/app"
       - ~/.composer:/home/zalex/.composer
+  prod:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+      target: prod
+    container_name: monitor-prod
+    volumes:
+      - monitor_home:/home/zalex
+      - ~/.composer:/home/zalex/.composer
 volumes:
   monitor_home:

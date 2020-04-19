@@ -23,3 +23,13 @@ USER zalex
 COPY . /usr/src/app
 
 CMD ["php", "-v"]
+
+FROM  dev as prod
+USER root
+RUN rm -rf ./* && rm "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini" && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY . /usr/src/app
+ENV APP_ENV=prod
+#RUN  composer install --no-dev --optimize-autoloader
+#RUN chown zalex:zalex .
+#USER zalex
+CMD ["fish"]
