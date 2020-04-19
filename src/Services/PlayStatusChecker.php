@@ -22,7 +22,7 @@ class PlayStatusChecker
         /** @var SimpleAnswer $answer */
         $answer = $this->client->status();
 
-        return $answer->getStatus() && strtolower($answer->getState()) === 'playing';
+        return $answer->getStatus() && strtolower($answer->getState()) === 'play';
     }
 
     public function tryToPlayAgain(): void
