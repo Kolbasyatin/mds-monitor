@@ -33,7 +33,7 @@ class PlayStatusCheckerTest extends TestCase
         $answer
             ->expects($this->exactly(2))
             ->method('__call')
-            ->willReturnOnConsecutiveCalls('playing', 'paused', 'playing');
+            ->willReturnOnConsecutiveCalls('play', 'paused', 'play');
 
         $client = $this->createMock(MPDClient::class);
         $client

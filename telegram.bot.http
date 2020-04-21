@@ -1,0 +1,5 @@
+GET https://{{host}}/bot{{id}}/getUpdates
+Accept: application/json
+
+
+###

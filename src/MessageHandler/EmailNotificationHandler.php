@@ -16,10 +16,10 @@ class EmailNotificationHandler implements MessageHandlerInterface
     private Swift_Mailer $mailer;
     private array $emailAddresses;
 
-    public function __construct(Swift_Mailer $mailer, array $emailAddreses)
+    public function __construct(Swift_Mailer $mailer, array $emailAddresses)
     {
         $this->mailer = $mailer;
-        $this->emailAddresses = $emailAddreses;
+        $this->emailAddresses = $emailAddresses;
     }
 
     public function __invoke(MonitoringResultMessage $message)

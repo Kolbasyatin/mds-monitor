@@ -18,7 +18,7 @@ class TextMessageCreator
     public function createMessage(string $source): MonitoringResultMessage
     {
         $text = sprintf(
-            'Source %s is not playing.  Host %s, port %d.',
+            'Source %s is not playing.  Host %s, Port %d.',
             $source,
             $this->mpdOptions['host'],
             $this->mpdOptions['port']
