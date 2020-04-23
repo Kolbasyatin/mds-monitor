@@ -14,13 +14,14 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash \
     && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+COPY .docker/xdebug-settings.ini "$PHP_INI_DIR/conf.d/xdebug-settings.ini"
 
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-RUN useradd -s /usr/bin/fish -m zalex && echo 'zalex:password' | chpasswd && usermod -a -G sudo zalex
-USER zalex
-
+RUN useradd -s /usr/bin/fish -m zalex && echo 'zalex:zalex' | chpasswd && usermod -a -G sudo zalex
 COPY . /usr/src/app
+RUN chown -R zalex:zalex .
+USER zalex
 
 CMD ["php", "-v"]
 

@@ -1,7 +1,7 @@
 swiftmailer:
     url: '%env(MAILER_URL)%'
     spool:
-      type: 'file'
+      type: 'memory'
       path: /tmp/swiftmailer/spool
     encryption: ssl
     sender_address: noreply@zalex.com.ua

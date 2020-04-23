@@ -1,0 +1,9 @@
+language: php
+
+matrix:
+  include:
+    - php: '7.4'
+install:
+  - composer install
+script:
+  - ./vendor/bin/simple-phpunit --configuration phpunit.xml.dist
