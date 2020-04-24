@@ -19,6 +19,7 @@ services:
     volumes:
       - monitor_home:/home/zalex
       - ~/.composer:/home/zalex/.composer
-      - /tmp:/tmp
+      - monitor_tmp:/tmp
 volumes:
   monitor_home:
+  monitor_tmp:

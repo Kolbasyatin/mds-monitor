@@ -317,16 +317,16 @@
         },
         {
             "name": "kolbasyatin/php-mpd-client",
-            "version": "0.0.2",
+            "version": "0.0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kolbasyatin/php-mpd-client.git",
-                "reference": "46f01c2823e3935b4a0ae2af4b3259d6cc00b4a4"
+                "reference": "c0cf6d72028e0a11216309e76740060cb5d831ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kolbasyatin/php-mpd-client/zipball/46f01c2823e3935b4a0ae2af4b3259d6cc00b4a4",
-                "reference": "46f01c2823e3935b4a0ae2af4b3259d6cc00b4a4",
+                "url": "https://api.github.com/repos/Kolbasyatin/php-mpd-client/zipball/c0cf6d72028e0a11216309e76740060cb5d831ce",
+                "reference": "c0cf6d72028e0a11216309e76740060cb5d831ce",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
             ],
             "description": "Light MPD client",
             "homepage": "http://mds.planeset.ru",
-            "time": "2019-11-29T11:13:07+00:00"
+            "time": "2020-04-23T18:54:24+00:00"
         },
         {
             "name": "longman/telegram-bot",

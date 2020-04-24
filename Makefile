@@ -20,3 +20,6 @@ cli:
 
 test:
 	@$(dockerc) run --rm php ./bin/phpunit
+
+production:
+	@$(dockerc) build prod

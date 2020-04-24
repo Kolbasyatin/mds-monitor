@@ -20,7 +20,7 @@ RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/
 
 RUN useradd -s /usr/bin/fish -m zalex && echo 'zalex:zalex' | chpasswd && usermod -a -G sudo zalex
 COPY . /usr/src/app
-RUN chown -R zalex:zalex .
+RUN chown -R zalex:zalex *
 USER zalex
 
 CMD ["php", "-v"]
@@ -40,6 +40,6 @@ ENV APP_ENV=prod \
     APP_EMAIL_RECEIVER='notify@planeset.ru'
 
 RUN  composer install --no-dev --optimize-autoloader
-RUN chown zalex:zalex .
+RUN chown -R zalex:zalex *
 USER zalex
 CMD ["fish"]

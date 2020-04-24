@@ -16,3 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 http-client.private.env.json
+monitor.sh
