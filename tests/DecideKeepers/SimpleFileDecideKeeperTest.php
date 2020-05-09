@@ -10,23 +10,34 @@ use Symfony\Component\Finder\Finder;
 class SimpleFileDecideKeeperTest extends TestCase
 {
 
-    public function testNotifyKeep()
+    /** @dataProvider decideData
+     * @param string $data
+     */
+    public function testNotifyKeep(string $status): void
     {
         $fileSystem = new Filesystem();
         $fileSystem->remove('/tmp/foo.status.yaml');
 
         $decider = new SimpleFileDecideKeeper();
-        $decider->setNotifyStatus('foo', true);
+        $decider->setNotifyStatus('foo', $status);
 
         $finder = new Finder();
         $files = $finder->files()->name('foo.status.yaml')->in('/tmp');
         static::assertCount(1, $files);
 
-        $status = $decider->getNotifyStatus('foo');
-        static::assertTrue($status);
-        $decider->setNotifyStatus('foo', false);
-        $status = $decider->getNotifyStatus('foo');
-        static::assertFalse($status);
+        $actual = $decider->getNotifyStatus('foo');
+        static::assertEquals((int)$status, (int)$actual);
+    }
+
+    public function decideData(): array
+    {
+        return [
+            ['1'],
+            ['2'],
+            ['3'],
+            [(string)false],
+            ['lock']
+        ];
     }
 
     public function testNoFile()
@@ -35,6 +46,6 @@ class SimpleFileDecideKeeperTest extends TestCase
         $fileSystem->remove('/tmp/foo.status.yaml');
         $decider = new SimpleFileDecideKeeper();
         $status = $decider->getNotifyStatus('foo');
-        static::assertFalse($status);
+        static::assertEmpty($status);
     }
 }

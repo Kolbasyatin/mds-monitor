@@ -14,22 +14,22 @@ class SimpleFileDecideKeeper implements DecideKeeperInterface
     private string $folder = '/tmp';
     private string $fileNameFormat = '%s.status.yaml';
 
-    public function setNotifyStatus(string $source, bool $status): void
+    public function setNotifyStatus(string $source, string $statusData): void
     {
-        $yaml = Yaml::dump([$source => (int)$status]);
+        $yaml = Yaml::dump([$source => $statusData]);
         file_put_contents($this->getFilePath($source), $yaml);
     }
 
-    public function getNotifyStatus(string $source): bool
+    public function getNotifyStatus(string $source): string
     {
         $finder = new Finder();
         $files = $finder->files()->name(sprintf($this->fileNameFormat, $source))->in($this->folder);
         if (!$files->count()) {
-            return false;
+            return '';
         }
         $value = Yaml::parseFile($this->getFilePath($source));
 
-        return (bool)$value[$source] ?? false;
+        return $value[$source] ?? '';
     }
 
     private function getFilePath(string $source): string

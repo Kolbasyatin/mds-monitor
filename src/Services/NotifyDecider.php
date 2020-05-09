@@ -10,28 +10,37 @@ use App\DecideKeepers\DecideKeeperInterface;
 
 class NotifyDecider
 {
+
+    private DecideStrategyInterface $decideStrategy;
     /**
      * @var DecideKeeperInterface
      */
     private DecideKeeperInterface $decideKeeper;
 
-    public function __construct(DecideKeeperInterface $decideKeeper)
+    public function __construct(DecideStrategyInterface $decideStrategy, DecideKeeperInterface $decideKeeper)
     {
+        $this->decideStrategy = $decideStrategy;
         $this->decideKeeper = $decideKeeper;
     }
 
     public function isNeedNotification(string $source): bool
     {
-        return !$this->decideKeeper->getNotifyStatus($source);
+        $data = $this->decideKeeper->getNotifyStatus($source);
+        $result = $this->decideStrategy->decide($data);
+        $this->decideKeeper->setNotifyStatus($source, $result->getDecideInformation());
+
+        return $result->isDecideIsPositive();
     }
 
-    public function wasSend(string $source): void
+    public function notificationWasSend(string $source): void
     {
-        $this->decideKeeper->setNotifyStatus($source, true);
+        $lockStatus = $this->decideStrategy->lock();
+        $this->decideKeeper->setNotifyStatus($source, $lockStatus);
     }
 
-    public function playIsOk(string $source): void
+    public function playingIsOk(string $source): void
     {
-        $this->decideKeeper->setNotifyStatus($source, false);
+        $resetStatus = $this->decideStrategy->reset();
+        $this->decideKeeper->setNotifyStatus($source, $resetStatus);
     }
 }

@@ -6,7 +6,7 @@ namespace App\DecideKeepers;
 
 interface DecideKeeperInterface
 {
-    public function setNotifyStatus(string $source, bool $status): void;
+    public function setNotifyStatus(string $source, string $statusData): void;
 
-    public function getNotifyStatus(string $source): bool;
+    public function getNotifyStatus(string $source): string ;
 }

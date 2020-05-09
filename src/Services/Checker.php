@@ -38,7 +38,7 @@ class Checker
     {
         $isSourcePlaying = $this->statusChecker->isSourcePlaying();
         if ($isSourcePlaying) {
-            $this->decider->playIsOk($source);
+            $this->decider->playingIsOk($source);
         }
         if (!$isSourcePlaying) {
             $this->notify($source);
@@ -52,7 +52,7 @@ class Checker
     {
         if ($this->decider->isNeedNotification($source)) {
             $this->notifier->notify($source);
-            $this->decider->wasSend($source);
+            $this->decider->notificationWasSend($source);
         }
     }
 }

@@ -33,8 +33,8 @@ class CheckerTest extends TestCase
         $this->statusChecker->expects($this->never())->method('tryToPlayAgain');
         $this->notifier->expects($this->never())->method('notify');
         $this->decider->expects($this->never())->method('isNeedNotification');
-        $this->decider->expects($this->never())->method('wasSend');
-        $this->decider->expects($this->once())->method('playIsOk')->with($source);
+        $this->decider->expects($this->never())->method('notificationWasSend');
+        $this->decider->expects($this->once())->method('playingIsOk')->with($source);
 
         $checker = new Checker($this->statusChecker, $this->notifier, $this->decider);
         static::assertTrue($checker->check($source));
@@ -48,8 +48,8 @@ class CheckerTest extends TestCase
         $this->statusChecker->expects($this->once())->method('tryToPlayAgain');
         $this->notifier->expects($this->once())->method('notify')->with($source);
         $this->decider->expects($this->once())->method('isNeedNotification')->with($source)->willReturn(true);
-        $this->decider->expects($this->once())->method('wasSend')->with($source);
-        $this->decider->expects($this->never())->method('playIsOk');
+        $this->decider->expects($this->once())->method('notificationWasSend')->with($source);
+        $this->decider->expects($this->never())->method('playingIsOk');
 
         $checker = new Checker($this->statusChecker, $this->notifier, $this->decider);
         static::assertFalse($checker->check($source));
@@ -63,8 +63,8 @@ class CheckerTest extends TestCase
         $this->statusChecker->expects($this->once())->method('tryToPlayAgain');
         $this->notifier->expects($this->never())->method('notify')->with($source);
         $this->decider->expects($this->once())->method('isNeedNotification')->with($source)->willReturn(false);
-        $this->decider->expects($this->never())->method('wasSend');
-        $this->decider->expects($this->never())->method('playIsOk');
+        $this->decider->expects($this->never())->method('notificationWasSend');
+        $this->decider->expects($this->never())->method('playingIsOk');
 
         $checker = new Checker($this->statusChecker, $this->notifier, $this->decider);
         static::assertFalse($checker->check($source));
