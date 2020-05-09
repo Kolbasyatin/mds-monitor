@@ -8,12 +8,14 @@ parameters:
         host: '%env(APP_MPD_CLIENT_HOST)%'
         port: '%env(APP_MPD_CLIENT_PORT)%'
         password: '%env(APP_MPD_CLIENT_PASSWORD)%'
+        timeout: '%env(APP_MPD_SOCKET_TIMEOUT)%'
 
     app.email_addresses:
         receiver: '%env(APP_EMAIL_RECEIVER)%'
         sender: 'noreply@zalex.com.ua'
     app.telegram.botKey: '%env(string:APP_TELEGRAM_BOT_KEY)%'
     app.telegram.botName: 'MdsShipBot'
+    app.decider.threshold: '%env(APP_DECIDER_THRESHOLD)%'
 
 services:
     # default configuration for services in *this* file
@@ -23,6 +25,7 @@ services:
         bind:
             $mpdOptions:    '%app.mpd_client%'
             $emailAddresses: '%app.email_addresses%'
+            $threshold: '%app.decider.threshold%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

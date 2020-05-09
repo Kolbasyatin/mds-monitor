@@ -14,10 +14,11 @@ class MPDClientFactoryTest extends TestCase
         $config = [
             'host' => 'foo',
             'port' => 6100,
-            'password' => 'bar'
+            'password' => 'bar',
+            'timeout' => 2
         ];
-        $mpcClient = MPDClientFactory::createClient($config);
+        $mpdClient = MPDClientFactory::createClient($config);
 
-        static::assertInstanceOf(MPDClient::class, $mpcClient);
+        static::assertInstanceOf(MPDClient::class, $mpdClient);
     }
 }

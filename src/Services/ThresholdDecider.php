@@ -15,22 +15,21 @@ use App\Models\DecideResult;
  */
 class ThresholdDecider implements DecideStrategyInterface
 {
-
     /**
      *
      */
     public const LOCK_STATUS = 'lock';
     /**
-     * @var int|null
+     * @var int
      */
     private int $threshold;
 
 
     /**
      * ThresholdDecider constructor.
-     * @param int|null $threshold
+     * @param int $threshold
      */
-    public function __construct(?int $threshold = 2)
+    public function __construct(int $threshold)
     {
         $this->threshold = $threshold;
     }

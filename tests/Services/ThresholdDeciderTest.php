@@ -4,15 +4,20 @@ namespace App\Tests\Services;
 
 use App\Services\DecideStrategyInterface;
 use App\Services\ThresholdDecider;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ThresholdDeciderTest extends TestCase
+/**
+ * Class ThresholdDeciderTest
+ * @package App\Tests\Services
+ */
+class ThresholdDeciderTest extends KernelTestCase
 {
     private DecideStrategyInterface $service;
 
     protected function setUp(): void
     {
-        $this->service = new ThresholdDecider();
+        self::bootKernel();
+        $this->service = self::$container->get(DecideStrategyInterface::class);
     }
 
 
