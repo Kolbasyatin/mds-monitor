@@ -30,11 +30,11 @@ class PlayCheckCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['source' => 'foo']);
         $output = $commandTester->getDisplay();
-        static::assertSame('Check command was done with status true', trim($output));
+        static::assertStringContainsString('Check command was done with status true', trim($output));
 
         $commandTester->execute(['source' => 'foo']);
         $output = $commandTester->getDisplay();
-        static::assertSame('Check command was done with status false', trim($output));
+        static::assertStringContainsString('Check command was done with status false', trim($output));
 
         static::expectException(RuntimeException::class);
         $commandTester->execute([]);

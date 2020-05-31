@@ -30,6 +30,7 @@ class TelegramNotificationHandler implements MessageHandlerInterface
 
     /**
      * @param MonitoringResultMessage $message
+     * @return bool
      * @throws TelegramException
      */
     public function __invoke(MonitoringResultMessage $message): bool

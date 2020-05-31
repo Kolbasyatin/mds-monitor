@@ -49,7 +49,7 @@ class PlayCheckCommand extends Command
         $source = $input->getArgument('source');
         $result = $this->checker->check($source);
 
-        $output->writeln(sprintf('Check command was done with status %s', $result ? 'true' : 'false'));
+        $output->writeln(sprintf('%s: Check command was done with status %s', (new \DateTime())->format('Y-m-d H:i:s'),$result ? 'true' : 'false'));
 
         return 0;
     }

@@ -31,7 +31,7 @@ class MPDClientFactory
             'timeout' => $timeout
         ] = $mpdOptions;
         $connection = new MPDConnection(sprintf('%s:%d', $host, $port), $password);
-        $connection->setSocketTimeOut($timeout);
+        $connection->setSocketTimeOut((int)$timeout);
 
         return new MPDClient($connection, new SimpleAnswer());
     }
