@@ -7,7 +7,7 @@ namespace App\Services;
 
 
 use App\DecideKeepers\DecideKeeperInterface;
-use App\Models\DecideResult;
+use App\Models\Decision;
 
 /**
  * Class ThresholdDecider
@@ -35,20 +35,21 @@ class ThresholdDecider implements DecideStrategyInterface
     }
 
     /**
-     * @param string $attempt
-     * @return DecideResult
+     * @param string $currentStatus
+     * @return Decision
      */
-    public function decide(string $attempt): DecideResult
+    public function decide(string $currentStatus): Decision
     {
-        $isLock = $attempt === self::LOCK_STATUS;
+        $isLock = $currentStatus === self::LOCK_STATUS;
         if ($isLock) {
-            $result = new DecideResult(false, $attempt);
+            $decision = new Decision(false, $currentStatus);
         } else {
-            $attempt = ++$attempt;
-            $isDecidePositive = $attempt >= $this->threshold;
-            $result = new DecideResult($isDecidePositive, (string)$attempt);
+            $attempt = (int)$currentStatus;
+            $isDecidePositive = ++$attempt >= $this->threshold;
+            $decision = new Decision($isDecidePositive, (string)$attempt);
         }
-        return $result;
+
+        return $decision;
     }
 
     /**

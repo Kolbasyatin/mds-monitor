@@ -3,7 +3,7 @@
 namespace App\Tests\Services;
 
 use App\DecideKeepers\DecideKeeperInterface;
-use App\Models\DecideResult;
+use App\Models\Decision;
 use App\Services\DecideStrategyInterface;
 use App\Services\NotifyDecider;
 use App\Tests\TestCase;
@@ -32,35 +32,35 @@ class NotifyDeciderTest extends TestCase
         $this->decider = new NotifyDecider($this->decideStrategy, $this->simpleKeeper);
     }
 
-    public function testPlayingIsOk()
+    public function testPlayingIsOk(): void
     {
         $this->simpleKeeper
-            ->expects($this->once())->method('getNotifyStatus')->with()
+            ->expects(self::once())->method('getNotifyStatus')->with()
             ->willReturn('');
         $this->simpleKeeper
-            ->expects($this->once())->method('setNotifyStatus')->with('foo', '1');
+            ->expects(self::once())->method('setNotifyStatus')->with('foo', '1');
         $this->decideStrategy
-            ->expects($this->once())->method('decide')->with('')
-            ->willReturn(new DecideResult(false, '1'));
+            ->expects(self::once())->method('decide')->with('')
+            ->willReturn(new Decision(false, '1'));
         $this->decider->isNeedNotification('foo');
     }
 
-    public function testNotificationWasSend()
+    public function testNotificationWasSend(): void
     {
         $this->decideStrategy
-            ->expects($this->once())->method('lock')
+            ->expects(self::once())->method('lock')
             ->willReturn('lock');
         $this->simpleKeeper
-            ->expects($this->once())->method('setNotifyStatus')->with('foo', 'lock');
+            ->expects(self::once())->method('setNotifyStatus')->with('foo', 'lock');
         $this->decider->notificationWasSend('foo');
     }
 
-    public function testIsNeedNotification()
+    public function testIsNeedNotification(): void
     {
         $this->decideStrategy
-            ->expects($this->once())->method('reset')->willReturn('');
+            ->expects(self::once())->method('reset')->willReturn('');
         $this->simpleKeeper
-            ->expects($this->once())->method('setNotifyStatus')->with('foo', '');
+            ->expects(self::once())->method('setNotifyStatus')->with('foo', '');
         $this->decider->playingIsOk('foo');
     }
 }

@@ -25,11 +25,11 @@ class NotifyDecider
 
     public function isNeedNotification(string $source): bool
     {
-        $data = $this->decideKeeper->getNotifyStatus($source);
-        $result = $this->decideStrategy->decide($data);
-        $this->decideKeeper->setNotifyStatus($source, $result->getDecideInformation());
+        $currentNotifyStatus = $this->decideKeeper->getNotifyStatus($source);
+        $decision = $this->decideStrategy->decide($currentNotifyStatus);
+        $this->decideKeeper->setNotifyStatus($source, $decision->getDecideInformation());
 
-        return $result->isDecideIsPositive();
+        return $decision->isDecideIsPositive();
     }
 
     public function notificationWasSend(string $source): void

@@ -4,11 +4,11 @@
 namespace App\Services;
 
 
-use App\Models\DecideResult;
+use App\Models\Decision;
 
 interface DecideStrategyInterface
 {
-    public function decide(string $data): DecideResult;
+    public function decide(string $currentStatus): Decision;
     public function lock(): string;
     public function reset(): string;
 }

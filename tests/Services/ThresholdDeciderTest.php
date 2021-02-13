@@ -21,35 +21,35 @@ class ThresholdDeciderTest extends KernelTestCase
     }
 
 
-    public function testDecide()
+    public function testDecide(): void
     {
         $actual = $this->service->decide('');
-        $this->assertFalse($actual->isDecideIsPositive());
-        $this->assertEquals('1', $actual->getDecideInformation());
+        self::assertFalse($actual->isDecideIsPositive());
+        self::assertEquals('1', $actual->getDecideInformation());
         $actual = $this->service->decide($actual->getDecideInformation());
-        $this->assertTrue($actual->isDecideIsPositive());
-        $this->assertEquals('2', $actual->getDecideInformation());
+        self::assertTrue($actual->isDecideIsPositive());
+        self::assertEquals('2', $actual->getDecideInformation());
     }
 
-    public function testDecideIfLock()
+    public function testDecideIfLock(): void
     {
         $actual = $this->service->decide('lock');
-        $this->assertEquals('lock', $actual->getDecideInformation());
-        $this->assertFalse($actual->isDecideIsPositive());
+        self::assertEquals('lock', $actual->getDecideInformation());
+        self::assertFalse($actual->isDecideIsPositive());
         $actual = $this->service->decide($actual->getDecideInformation());
-        $this->assertEquals('lock', $actual->getDecideInformation());
-        $this->assertFalse($actual->isDecideIsPositive());
+        self::assertEquals('lock', $actual->getDecideInformation());
+        self::assertFalse($actual->isDecideIsPositive());
     }
 
-    public function testLock()
+    public function testLock(): void
     {
         $actual = $this->service->lock('foo');
-        $this->assertEquals('lock', $actual);
+        self::assertEquals('lock', $actual);
     }
 
-    public function testReset()
+    public function testReset(): void
     {
         $actual = $this->service->reset('foo');
-        $this->assertEmpty($actual, sprintf('Expected empty, but got %s', $actual));
+        self::assertEmpty($actual, sprintf('Expected empty, but got %s', $actual));
     }
 }
